@@ -62,7 +62,7 @@ def delete_file_from_s3(bucket_name, object_name):
         s3.delete_object(Bucket=bucket_name, Key=object_name)
     except NoCredentialsError:
         raise HTTPException(status_code=500, detail="S3 credentials not available")
-    except ClientError:
+    except ClientError as ex:
+        print(ex)
         raise HTTPException(status_code=404, detail="File not found")
-    
     
